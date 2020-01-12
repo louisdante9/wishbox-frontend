@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>wishBox:: Signin</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700|Poppins:400,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        
+    </style>
+</head>
+<!-- align-items-center -->
+
+<body>
+    <div class="wrapper d-flex">
+        <div class="side-nav d-none d-lg-flex h-100 px-0 flex-column">
+            <div class="ds-brand-name flex-grow-1 px-2 pt-4">
+                <a href="/">wishBox</a>
+            </div>
+            <div class="flex-grow-1 d-lg-flex flex-column align-items-center justify-content-between">
+                <span>
+                    <a href="#">
+                        <i class="fa fa-th-large"></i>
+                        Home
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <i class="fa fa-folder-open-o"></i>
+                        Slots
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <i class="fa fa-dropbox"></i>
+                        Wishes
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <i class="fa fa-star"></i>
+                        Fulfiled
+                    </a>
+                </span>
+            </div>
+            <div class="flex-grow-1"></div>
+        </div>
+        <div class="container-fluid">
+            <nav class="profile-notif">
+                <ul class="nav justify-content-end mt-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-bell-o"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user-circle-o"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="filter">
+                <nav class="profile-notif">
+                    <ul class="nav justify-content-end mt-2">
+                        <li class="nav-item dropdown px-4">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Filter
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <form class="form-inline has-search">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input class="form-control mr-sm-2" type="search" placeholder="find.." aria-label="Search">
+                        </form>
+                    </ul>
+                </nav>
+            </div>
+            <div class="dash-cards d-flex">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fa fa-folder-open-o folder"></i>
+                        </div>
+                        <div class="card-number">203</div>
+                        <div class="card-caption">All Open Slots</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fa fa-dropbox box"></i>
+                        </div>
+                        <div class="card-number">823</div>
+                        <div class="card-caption">All Pending Wishes</div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="card-icon">
+                            <i class="fa fa-star star"></i>
+                        </div>
+                        <div class="card-number">16</div>
+                        <div class="card-caption">All Fulfiled Wishes</div>
+                    </div>
+                </div>
+            </div>
+            <div class="slots-wrapper d-lg-flex justify-content-between">
+                <div class="slots">
+                    <div class="slot-header">
+                        <div>
+                            <h3>RECENT SLOT CREATED</h3>
+                        </div>
+                        <div>
+                            <a href="">
+                                See All Slots
+                            </a>
+                        </div>
+                    </div>
+                    <div class="slot-list">
+                        <div class="list-header">
+                            <h4>Name of slot</h4>
+                            <h4>Number of wishes</h4>
+                            <h4>Closing Date</h4>
+                        </div>
+                        <div class="list">
+                            <a class="list-item" href="#">
+                                <span><strong>D</strong>December wishbox</span>
+                                <span>2000 wishes</span>
+                                <span class="text-right">16/06/19</span>
+                            </a>
+                            <a class="list-item" href="#">
+                                <span><strong>D</strong>December wishbox</span>
+                                <span>2000 wishes</span>
+                                <span class="text-right">16/06/19</span>
+                            </a>
+                            <a class="list-item" href="#">
+                                <span><strong>D</strong>December wishbox</span>
+                                <span>2000 wishes</span>
+                                <span class="text-right">16/06/19</span>
+                            </a>
+                            <a class="list-item" href="#">
+                                <span><strong>D</strong>December wishbox</span>
+                                <span>2000 wishes</span>
+                                <span class="text-right">16/06/19</span>
+                            </a>
+                            <a class="list-item" href="#">
+                                <span><strong>D</strong>December wishbox</span>
+                                <span>2000 wishes</span>
+                                <span class="text-right">16/06/19</span>
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="fulfiled-slots">
+                    <h4 class="fulfiled-header">RECENTLY FULFILED WISHES</h4>
+                    <div class="fulfiled-list">
+                        <div class="fulfiled-list-header">
+                            <span>Fulfiled:</span>
+                            <span>31 June, 2019</span>
+                            <span><i class="fa fa-star"></i></span>
+                        </div>
+                        <div class="fulfiled-list-body">
+                            I wish for new pair of nike airmax,
+                            that all i really need right now, my old shoes are bad
+                        </div>
+                    </div>
+                    <div class="fulfiled-list">
+                        <div class="fulfiled-list-header">
+                            <span>Fulfiled:</span>
+                            <span>31 June, 2019</span>
+                            <span><i class="fa fa-star"></i></span>
+                        </div>
+                        <div class="fulfiled-list-body">
+                            I wish for new pair of nike airmax,
+                            that all i really need right now, my old shoes are bad
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-blue">
+        <span class="copy-right">&copy; wishBox. All rights reserved </span>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+        </ul>
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</html>

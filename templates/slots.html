@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>wishBox:: Slots</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700|Poppins:400,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .filter .profile-notif {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .page-identifier h3 {
+            font-style: normal;
+            font-weight: bold;
+            font-size: 36px;
+            line-height: 44px;
+            color: #3D3D3D;
+        }
+
+        .page-identifier p {
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 19px;
+            text-align: right;
+            color: #909090;
+        }
+
+        .slot-item {
+            display: flex;
+            align-items: center;
+            height: 124.98px;
+            background: #FFFFFF;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+
+        .slot-item>div {
+            height: inherit;
+            width: 100px;
+        }
+
+        .slot-tag {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 25px;
+            color: #0E0E52;
+            background: #F7F7F7;
+            border-radius: 6px;
+            flex: 0 0 auto;
+            text-align: center;
+            padding: 45px 0;
+        }
+
+        .slot-name {
+            flex: 1 1 auto;
+            padding: 20px;
+        }
+
+        .slot-name .wish-month {
+            font-weight: 500;
+            font-size: 24px;
+            line-height: 29px;
+            color: #3D3D3D;
+        }
+
+        .slot-name .wish-date {
+            font-weight: normal;
+            font-size: 18px;
+            line-height: 22px;
+            color: #0E0E52;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .slot-name .wish-count {
+            font-weight: 500;
+            font-size: 20px;
+            line-height: 24px;
+            color: #999999;
+        }
+
+        .slot-desc {
+            border-left: 1px solid #EBEBEB;
+            border-right: 1px solid #EBEBEB;
+            flex: 2 2 auto;
+            padding: 20px;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 16px;
+            line-height: 26px;
+            color: #999999;
+        }
+
+        .slot-wish {
+            flex: 1 1 auto;
+            padding: 45px 28px;
+        }
+
+        .slot-wish-btn {
+            background-color: #377CFF;
+            border-radius: 3px;
+            width: 200px;
+            height: 49.99px;
+            line-height: 49.99px;
+            text-align: center;
+            color: #FFFFFF;
+            font-weight: 500;
+            font-size: 20px;
+            display: block;
+        }
+
+        .slot-wish-btn:hover {
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<!-- align-items-center -->
+
+<body>
+    <div class="wrapper d-flex">
+        <div class="side-nav d-none d-lg-flex h-100 px-0 flex-column">
+            <div class="ds-brand-name flex-grow-1 px-2 pt-4">
+                <a href="/">wishBox</a>
+            </div>
+            <div class="flex-grow-1 d-lg-flex flex-column align-items-center justify-content-between">
+                <span>
+                    <a href="#">
+                        <i class="fa fa-th-large"></i>
+                        Home
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <i class="fa fa-folder-open-o"></i>
+                        Slots
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <i class="fa fa-dropbox"></i>
+                        Wishes
+                    </a>
+                </span>
+                <span>
+                    <a href="#">
+                        <i class="fa fa-star"></i>
+                        Fulfiled
+                    </a>
+                </span>
+            </div>
+            <div class="flex-grow-1"></div>
+        </div>
+        <div class="container-fluid">
+            <nav class="profile-notif">
+
+                <ul class="nav justify-content-end mt-2">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-bell-o"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user-circle-o"></i>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="filter">
+                <nav class="profile-notif">
+                    <span class="page-identifier">
+                        <h3>Slots</h3>
+                        <p>
+                            6 slots in progress
+                        </p>
+                    </span>
+                    <ul class="nav justify-content-end mt-2">
+                        <li class="nav-item dropdown px-4">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Filter
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                        <form class="form-inline has-search">
+                            <span class="fa fa-search form-control-feedback"></span>
+                            <input class="form-control mr-sm-2" type="search" placeholder="find.." aria-label="Search">
+                        </form>
+                    </ul>
+                </nav>
+            </div>
+            <div class="slots-lists">
+                <div class="slot-item">
+                    <div class="slot-tag">
+                        <div>Slot</div>
+                        <div>1</div>
+                    </div>
+                    <div class="slot-name">
+                        <div class="wish-month">December Wishbox</div>
+                        <div class="wish-date">13/06/19 - 16/06/19</div>
+                        <div class="wish-count">2000 wishes</div>
+                    </div>
+                    <div class="slot-desc">
+                        We all want something for ourselves this christmas, simply
+                        pt your wish out there and someone might just get it for you and
+                        you can also return the favour if you like!
+                    </div>
+                    <div class="slot-wish">
+                        <a href="#" class="slot-wish-btn">Make a Wish</a>
+                    </div>
+                </div>
+                <div class="slot-item">
+                    <div class="slot-tag">
+                        <div>Slot</div>
+                        <div>1</div>
+                    </div>
+                    <div class="slot-name">
+                        <div class="wish-month">December Wishbox</div>
+                        <div class="wish-date">13/06/19 - 16/06/19</div>
+                        <div class="wish-count">2000 wishes</div>
+                    </div>
+                    <div class="slot-desc">
+                        We all want something for ourselves this christmas, simply
+                        pt your wish out there and someone might just get it for you and
+                        you can also return the favour if you like!
+                    </div>
+                    <div class="slot-wish">
+                        <a href="#" class="slot-wish-btn">Make a Wish</a>
+                    </div>
+                </div>
+                <div class="slot-item">
+                    <div class="slot-tag">
+                        <div>Slot</div>
+                        <div>1</div>
+                    </div>
+                    <div class="slot-name">
+                        <div class="wish-month">December Wishbox</div>
+                        <div class="wish-date">13/06/19 - 16/06/19</div>
+                        <div class="wish-count">2000 wishes</div>
+                    </div>
+                    <div class="slot-desc">
+                        We all want something for ourselves this christmas, simply
+                        pt your wish out there and someone might just get it for you and
+                        you can also return the favour if you like!
+                    </div>
+                    <div class="slot-wish">
+                        <a href="#" class="slot-wish-btn">Make a Wish</a>
+                    </div>
+                </div>
+                <div class="slot-item">
+                    <div class="slot-tag">
+                        <div>Slot</div>
+                        <div>1</div>
+                    </div>
+                    <div class="slot-name">
+                        <div class="wish-month">December Wishbox</div>
+                        <div class="wish-date">13/06/19 - 16/06/19</div>
+                        <div class="wish-count">2000 wishes</div>
+                    </div>
+                    <div class="slot-desc">
+                        We all want something for ourselves this christmas, simply
+                        pt your wish out there and someone might just get it for you and
+                        you can also return the favour if you like!
+                    </div>
+                    <div class="slot-wish">
+                        <a href="#" class="slot-wish-btn">Make a Wish</a>
+                    </div>
+                </div>
+                    <div aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                
+            </div>
+        </div>
+    </div>
+    <footer class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-blue">
+        <span class="copy-right">&copy; wishBox. All rights reserved </span>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+        </ul>
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</html>

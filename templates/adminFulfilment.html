@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>wishBox:: Signin</title>
+
+    <link href="https://fonts.googleapis.com/css?family=Cabin:400,500,600,700|Poppins:400,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .admin-see-all-slots a {
+            text-align: right;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 17px;
+            text-decoration-line: underline;
+            color: #0E0E52;
+        }
+
+        .admin-see-all-slots a:hover {
+            border-left: 4px solid transparent !important;
+            text-decoration-line: underline;
+            color: #0E0E52 !important;
+            font-size: 14px;
+
+        }
+        #completed {
+            color: #19B344 !important;
+            margin-left: 15px;
+            font-weight: 600 !important;
+            font-size: 18px !important;
+        }
+    </style>
+</head>
+<!-- align-items-center -->
+
+<body>
+    <div class="admin-nav">
+        <nav class="profile-notif">
+            <div class="ds-brand-name flex-grow-1 px-2 pt-4">
+                <a href="/">wishBox</a>
+            </div>
+            <div class="flex-grow-1 d-lg-flex flex align-items-center justify-content-center">
+                <span>
+                    <a href="#">
+                        Dashboard
+                    </a>
+                </span>
+                <span>
+                    <a href="#" >
+                        Wishes
+                    </a>
+                </span>
+                <span>
+                    <a href="#" class="active">
+                        Fulfilments
+                    </a>
+                </span>
+            </div>
+            <div class="flex-grow-1">
+                <ul class="nav justify-content-center mt-2">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-bell-o"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fa fa-user-circle-o"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="wrapper d-flex">
+
+        <div class="container-fluid">
+
+            <div class="main-wrapper admin-profile-wrapper">
+                <div class="left">
+
+                    <div>
+                        <div class="setting-icon">
+                            <i class="fa fa-cog"></i>
+                        </div>
+                        <div class="img-frame">
+                            <img src="" alt="">
+                        </div>
+                        <h5 class="usr-name">Balafama Louis</h5>
+                        <div class="usr-stats">
+                            <div>
+                                <p>SLOTS</p>
+                                <p>23</p>
+                            </div>
+                            <div>
+                                <p>WISHES</p>
+                                <p>12K</p>
+                            </div>
+                            <div>
+                                <p>FULFILMENTS</p>
+                                <p>3K</p>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary btn-lg btn-create-slot">Create a Slot</button>
+                    </div>
+
+                    <div class="slot-bar admin-slot-bar">
+                        <h4>Recently Added Slots</h4>
+                        <div>
+                            <a href="">December wishbox</a>
+                        </div>
+                        <div>
+                            <a href="">New year Exchange</a>
+                        </div>
+                        <div>
+                            <a href="">January gifting</a>
+                        </div>
+                        <div>
+                            <a href="">Valentine Secret Admirer</a>
+                        </div>
+                        <div class="admin-see-all-slots">
+                            <a href="">See All Slots</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="d-lg-flex flex justify-content-between">
+                        <div>
+                            <h3>Fulfilments</h3>
+                            <p>40 Fulfiments in New Year Exchange</p>
+                        </div>
+                        <div class="d-lg-flex flex align-items-center">
+                            <div class="nav-item dropdown px-4">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Filter
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </div>
+                            <form class="form-inline has-search">
+                                <span class="fa fa-search form-control-feedback"></span>
+                                <input class="form-control mr-sm-2 " type="search" placeholder="find..."
+                                    aria-label="Search" id="slot-search">
+                            </form>
+                        </div>
+                    </div>
+                    <div class="wish-slot-wrapper">
+                        <div class="admin-slot-item admin-slots">
+                            <div class="slot-item-statusbar admin-status">
+                                <div>Status: <span id="completed">Completed</span></div>
+                                <div>New Year Exchange</div>
+                            </div>
+                            <div class="slot-item-title admin-title">
+                                <p>
+                                    I wish for new pair of nike airmax,
+                                    that all i really need right now, my old shoes are bad
+                                </p>
+                                <button type="button" class="btn btn-outline-primary">View</button>
+
+                            </div>
+                            <div class="slot-item-desc admin-desc">
+                                <p>
+                                    Louis Dante
+                                </p>
+                                <div>
+                                    <span>30th June 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-slot-item admin-slots">
+                            <div class="slot-item-statusbar admin-status">
+                                <div>Status: <span id="completed">Completed</span></div>
+                                <div>New Year Exchange</div>
+                            </div>
+                            <div class="slot-item-title admin-title">
+                                <p>
+                                    I wish for new pair of nike airmax,
+                                    that all i really need right now, my old shoes are bad
+                                </p>
+                                <button type="button" class="btn btn-outline-primary">View</button>
+                            </div>
+                            <div class="slot-item-desc admin-desc">
+                                <p>
+                                    Louis Dante
+                                </p>
+                                <div>
+                                    <span>30th June 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-slot-item admin-slots">
+                            <div class="slot-item-statusbar admin-status">
+                                <div>Status: <span id="completed">Completed</span></div>
+                                <div>New Year Exchange</div>
+                            </div>
+                            <div class="slot-item-title admin-title">
+                                <p>
+                                    I wish for new pair of nike airmax,
+                                    that all i really need right now, my old shoes are bad
+                                </p>
+                                <button type="button" class="btn btn-outline-primary">View</button>
+                            </div>
+                            <div class="slot-item-desc admin-desc">
+                                <p>
+                                    Louis Dante
+                                </p>
+                                <div>
+                                    <span>30th June 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-slot-item admin-slots">
+                            <div class="slot-item-statusbar admin-status">
+                                <div>Status: <span id="completed">Completed</span></div>
+                                <div>New Year Exchange</div>
+                            </div>
+                            <div class="slot-item-title admin-title">
+                                <p>
+                                    I wish for new pair of nike airmax,
+                                    that all i really need right now, my old shoes are bad
+                                </p>
+                                <button type="button" class="btn btn-outline-primary">View</button>
+                            </div>
+                            <div class="slot-item-desc admin-desc">
+                                <p>
+                                    Louis Dante
+                                </p>
+                                <div>
+                                    <span>30th June 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-slot-item admin-slots">
+                            <div class="slot-item-statusbar admin-status">
+                                <div>Status: <span id="completed">Completed</span></div>
+                                <div>New Year Exchange</div>
+                            </div>
+                            <div class="slot-item-title admin-title">
+                                <p>
+                                    I wish for new pair of nike airmax,
+                                    that all i really need right now, my old shoes are bad
+                                </p>
+                                <button type="button" class="btn btn-outline-primary">View</button>
+                            </div>
+                            <div class="slot-item-desc admin-desc">
+                                <p>
+                                    Louis Dante
+                                </p>
+                                <div>
+                                    <span>30th June 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="admin-slot-item admin-slots">
+                            <div class="slot-item-statusbar admin-status">
+                                <div>Status: <span id="completed">Completed</span></div>
+                                <div>New Year Exchange</div>
+                            </div>
+                            <div class="slot-item-title admin-title">
+                                <p>
+                                    I wish for new pair of nike airmax,
+                                    that all i really need right now, my old shoes are bad
+                                </p>
+                                <button type="button" class="btn btn-outline-primary">View</button>
+                            </div>
+                            <div class="slot-item-desc admin-desc">
+                                <p>
+                                    Louis Dante
+                                </p>
+                                <div>
+                                    <span>30th June 2019</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                            </li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="navbar fixed-bottom navbar-expand-sm navbar-dark bg-blue">
+        <span class="copy-right">&copy; wishBox. All rights reserved </span>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Home </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+
+        </ul>
+    </footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+</html>
