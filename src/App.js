@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
 import { createHashHistory } from 'history'
-// import CheckLoggedInUser from './utils/CheckLoggedInUser'
-// import { PrivateRoute } from './utils/PrivateRoute'
+import CheckLoggedInUser from './utils/CheckLoggedInUser'
+import { PrivateRoute } from './utils/PrivateRoute'
 // import { AdminPrivateRoute } from './utils/AdminPrivateRoute'
 // import AdminSignup from './components/AdminSignup';
 // import AdminLogin from './components/AdminLogin';
@@ -31,7 +31,7 @@ function App() {
         <Route exact path="/admin/signup" component={CheckLoggedInUser(AdminSignup)} />
         <Route exact path="/admin/signin" component={CheckLoggedInUser(AdminLogin)} />*/}
         <Route exact path="/" component={Home} /> 
-        <Route exact path="/signin" component={Signin} />
+        <Route exact path="/signin" component={CheckLoggedInUser(Signin)} />
       </div>
     </Router>
   )

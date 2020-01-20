@@ -8,7 +8,7 @@ import { USER_AUTHENTICATED, CREATE_PARCEL_SUCCESS,
    UPDATE_PARCEL_SUCCESS, UPDATE_PARCEL_ERROR} from './constants';
 
 // const API = 'https://creditdeliveries.herokuapp.com';
-const API = 'http://localhost:3002';
+const API = 'http://localhost:9000';
 
 
 
@@ -33,14 +33,15 @@ export function setCurrentUser(user) {
  * @param {any} responseData 
  * @returns {void}
  */
-// export function SigninRequest(userData) {
-//   return dispatch => axios.post(`${API}/api/v1/admin/signin`, userData).then(res => {
-//     const { token } = res.data;
-//     localStorage.setItem('jwtToken', token);
-//     setAuthToken(token);
-//     dispatch(setCurrentUser(decode(token)));
-//   });
-// }
+export function SigninRequest(userData) {
+     console.log(userData, 'hello there');
+  return dispatch => axios.post(`${API}/v1/login`, userData).then(res => {
+    const { token } = res.data;
+    localStorage.setItem('jwtToken', token);
+    setAuthToken(token);
+    dispatch(setCurrentUser(decode(token)));
+  });
+}
 // /**
 //  * 
 //  * 

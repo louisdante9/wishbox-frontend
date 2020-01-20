@@ -1,11 +1,14 @@
-import React, { useState,useEffect, Fragment } from 'react'
+import React, { useState, useEffect, Fragment } from 'react';
+import { validateFormInput } from '../validator';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import swal from 'sweetalert';
+import { SigninRequest } from '../actions';
 
 
-function Signin() {
+function Signin(props) {
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [confirmPassword, setConfirmPassword] = React.useState("");
-    const [helperText, setHelperText] = useState('');
     const [error, setError] = useState(false);
     const [isButtonDisabled, setIsButtonDisabled] = useState(true);
 
@@ -13,26 +16,14 @@ function Signin() {
 
 
 
-  useEffect(() => {
-    if (email.trim() && password.trim() && confirmPassword.trim()) {
-        // setHelperText('')
-      setIsButtonDisabled(false);
-    } else {
-      setIsButtonDisabled(true);
-    }
-  }, [email, password, confirmPassword]);
+    useEffect(() => {
+        if (email.trim() && password.trim()) {
+            setIsButtonDisabled(false);
+        } else {
+            setIsButtonDisabled(true);
+        }
+    }, [email, password]);
 
-    /**
-     * 
-     * @returns {void} 
-     * @param {any} event
-     * @memberof SignupForm
-     */
-    const onChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value,
-        });
-    }
 
 
     /**
@@ -44,29 +35,30 @@ function Signin() {
      * @returns {void}
      */
     const onSubmit = (event) => {
-          event.preventDefault();
-          if (password.trim() !== confirmPassword.trim()) {
-              console.log('error')
-            setError(true)
-            setHelperText('passwords don\'t match')
+        event.preventDefault();
+        const { errors, isValid } = validateFormInput({ email, password });
+        if (isValid) {
+            let obj = { email, password }
+            props.SigninRequest(obj)
+                .then(() => {
+                    props.history.push('/');
+                })
+                .catch((err) => {
+                    setError(true)
+                    swal({
+                        title: "Oops!, sorry username or password is wrong",
+                        icon: "warning"
+                    });                    
+                    console.log(err)
+                });
+        } else {
+            swal({
+                title: "Oops!, sorry all fields are required",
+                icon: "warning"
+            });
+            return errors
         }
-        //   const { errors, isValid } = validateFormInput(this.state);
-        //   if (isValid) {
-        //     this.setState({ isLoading: true });
-        //     this.props.SigninRequest(this.state)
-        //       .then(() => {
-        //         this.props.history.push('/dashboard');
-        //       })
-        //       .catch((err) => {
-        //        console.log(err.response.data)
-        //        console.log(err)
-        //       });
-        //   } else {
-        //     swal({
-        //       title: "Oops!, sorry all fields are required",
-        //       icon: "warning"
-        //     });
-        //   }
+
     }
 
 
@@ -94,28 +86,17 @@ function Signin() {
                                         <label className="form-label" htmlFor="email">EMAIL ADDRESS</label>
                                         <input type="email" className="form-control" name="email" id="email" placeholder="Email address"
                                             aria-label="Email address" required data-msg="Please enter a valid email address."
-                                            data-error-class="u-has-error" data-success-class="u-has-success" 
-                                            onChange={(e) => setEmail(e.target.value)}/>
+                                            data-error-class="u-has-error" data-success-class="u-has-success"
+                                            onChange={(e) => setEmail(e.target.value)} />
                                     </div>
 
                                     <div className="js-form-message form-group">
                                         <label className="form-label" htmlFor="password">PASSWORD</label>
                                         <input type="password" className="form-control" name="password" id="password" placeholder="********"
                                             aria-label="********" required data-msg="Your password is invalid. Please try again."
-                                            data-error-class="u-has-error" data-success-class="u-has-success" 
-                                            onChange={(e) => setPassword(e.target.value)}/>
+                                            data-error-class="u-has-error" data-success-class="u-has-success"
+                                            onChange={(e) => setPassword(e.target.value)} />
                                     </div>
-
-                                    <div className="js-form-message form-group">
-                                        <label className="form-label" htmlFor="confirmPassword">CONFIRM PASSWORD</label>
-                                        <input type="password" className="form-control" name="confirmPassword" id="confirmPassword"
-                                            placeholder="********" aria-label="********" required
-                                            data-msg="Password does not match the confirm password." data-error-class="u-has-error"
-                                            data-success-class="u-has-success" 
-                                            onChange={(e) => setConfirmPassword(e.target.value)}/>
-                                        <div> {error ? helperText : '' }</div>
-                                    </div>
-
                                     <div className="js-form-message mb-5">
                                         <div className="custom-control custom-checkbox d-flex align-items-center text-muted">
                                             <input type="checkbox" className="custom-control-input" id="termsCheckbox" name="termsCheckbox" required
@@ -137,10 +118,10 @@ function Signin() {
                                         </div>
 
                                         <div className="col-7 col-sm-6 text-right">
-                                            <button type="submit" 
-                                            className="btn btn-primary transition-3d-hover" 
-                                            onClick={onSubmit}
-                                            disabled={isButtonDisabled}>Get Started</button>
+                                            <button type="submit"
+                                                className="btn btn-primary transition-3d-hover"
+                                                onClick={onSubmit}
+                                                disabled={isButtonDisabled}>Get Started</button>
                                         </div>
                                     </div>
                                 </form>
@@ -152,5 +133,5 @@ function Signin() {
         </Fragment>
     )
 }
-
-export default Signin
+export default connect(null, { SigninRequest })(withRouter(Signin));
+// export default Signin
