@@ -69,16 +69,18 @@ function registerToken ({token}) {
  *
  * @desc this method signs up a user
  * @param {object} userData
+ * @param callback
  * @returns {boolean}
  */
-export function SignupRequest (userData) {
+export function SignupRequest (userData, callback) {
   return dispatch => axios.post(`${API}/v1/signup`, userData)
     .then(res => {
       const token = registerToken(res.data);
       dispatch(setCurrentUser(decode(token)));
-    }).catch(({response}) => {
-      dispatch(signupErros({errors: response.data}));
-      return false;
+      return callback(res);
+    }).catch(({res}) => {
+      dispatch(signupErros({errors: res}));
+      return callback(res);
     })
 }
 

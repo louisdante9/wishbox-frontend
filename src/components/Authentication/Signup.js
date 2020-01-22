@@ -1,10 +1,10 @@
 import React, {useState, useEffect, Fragment} from 'react';
-import {validateFormInput}                    from '../../validator';
+import {signupValidation}                     from '../../validator';
 import {connect}                              from 'react-redux';
 import {withRouter}                           from 'react-router-dom';
 import swal                                   from 'sweetalert';
 import {SignupRequest}                        from '../../actions';
-
+import HttpStatus                             from 'http-status-codes';
 
 function Signup (props) {
   const [name, setName] = React.useState("");
@@ -16,21 +16,28 @@ function Signup (props) {
   const [street, setStreet] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [helperText, setHelperText] = useState('');
+  const [helperTexts, setHelperTexts] = useState([]);
   const [error, setError] = useState(false);
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-
   const [loading, setLoading] = React.useState(false);
 
-
   useEffect(() => {
-    if (email.trim() && password.trim() && confirmPassword.trim()) {
-      // setHelperText('')
+    document.title = `wishBox::Signup`;
+    if (email.trim() &&
+      confirmPassword.trim() &&
+      password.trim() &&
+      name.trim() &&
+      username.trim() &&
+      phone.trim() &&
+      state.trim() &&
+      city.trim() &&
+      street.trim()
+    ) {
       setIsButtonDisabled(false);
     } else {
       setIsButtonDisabled(true);
     }
-  }, [email, password, confirmPassword]);
+  }, [name, username, password, confirmPassword, email, phone, state, city, street]);
 
   /**
    * This method validates the input from the state object
@@ -42,33 +49,38 @@ function Signup (props) {
    */
   const onSubmit = (event) => {
     event.preventDefault();
+    setLoading(true);
     if (password.trim() !== confirmPassword.trim()) {
-      console.log('error');
-
       setError(true);
-      setHelperText('passwords don\'t match')
+      setHelperTexts(['passwords don\'t match'])
     } else {
       const fields = {name, username, password, email, phone, state, city, street};
-      const {errors, isValid} = validateFormInput(fields);
+      const {errors, isValid} = signupValidation(fields);
 
       if (isValid) {
-        props.SignupRequest(fields)
-          .then((res) => {
-            console.log(res);
-            this.props.history.push('/');
-          })
-          .catch((err) => {
-            console.log(err)
-          });
+        props.SignupRequest(fields, (res) => {
+          if (res && res.status === HttpStatus.CREATED) {
+            swal({
+              title: "Welcome to wishbox!",
+              text: "Your account has been created successfully!",
+              icon: "success",
+              button: "Continue",
+            });
+            return props.history.push('/dashboard');
+          } else if (res && res.status === HttpStatus.UNPROCESSABLE_ENTITY) {
+            setError(true);
+            setHelperTexts(res.data.errors.map(error => (error.msg)))
+          } else if (res && res.status === HttpStatus.INTERNAL_SERVER_ERROR) {
+            setError(true);
+            setHelperTexts([res.data.message])
+          }
+        }, props.history)
       } else {
-        swal({
-          title: "Oops!, sorry all fields are required",
-          icon: "warning"
-        });
+        setError(true);
+        setHelperTexts(Object.values(errors))
       }
     }
   };
-
 
   return (
     <Fragment>
@@ -165,7 +177,9 @@ function Signup (props) {
                            data-msg="Password does not match the confirm password." data-error-class="u-has-error"
                            data-success-class="u-has-success"
                            onChange={(e) => setConfirmPassword(e.target.value)}/>
-                    <div> {error ? helperText : ''}</div>
+                    <div>
+                      <ul>{error ? helperTexts.map(text => (<li style={{color: 'red'}}>{text}</li>)) : ''}</ul>
+                    </div>
                   </div>
 
                   <div className="js-form-message mb-5">
@@ -177,7 +191,7 @@ function Signup (props) {
                       <label className="custom-control-label" htmlFor="termsCheckbox">
                         <small>
                           I agree to the
-                          <a className="link-muted" href="terms.html">Terms and Conditions</a>
+                          <a className="link-muted" href="terms">Terms and Conditions</a>
                         </small>
                       </label>
                     </div>
@@ -185,8 +199,8 @@ function Signup (props) {
 
                   <div className="row align-items-center mb-5">
                     <div className="col-5 col-sm-6">
-                      <span className="small text-muted">Don't have an account?</span>
-                      <a className="small" href="signin.html">Sign up</a>
+                      <span className="small text-muted">Already have an account?</span>
+                      <a className="small" href="signin">Sign In</a>
                     </div>
 
                     <div className="col-7 col-sm-6 text-right">
