@@ -74,7 +74,7 @@ function Signup (props) {
             setError(true);
             setHelperTexts([res.data.message])
           }
-        }, props.history)
+        })
       } else {
         setError(true);
         setHelperTexts(Object.values(errors))

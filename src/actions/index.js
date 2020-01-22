@@ -39,7 +39,7 @@ export function signupErros (errors) {
  *
  * @desc this function signs in a user
  * @param {object} responseData
- * @returns {boolean}
+ * @returns {function}
  */
 export function SigninRequest (userData) {
   return dispatch => axios.post(`${API}/v1/login`, userData)
@@ -70,7 +70,7 @@ function registerToken ({token}) {
  * @desc this method signs up a user
  * @param {object} userData
  * @param callback
- * @returns {boolean}
+ * @returns {function}
  */
 export function SignupRequest (userData, callback) {
   return dispatch => axios.post(`${API}/v1/signup`, userData)
