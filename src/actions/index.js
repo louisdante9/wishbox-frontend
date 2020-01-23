@@ -1,65 +1,88 @@
-import axios from 'axios';
-import jwtDecode from 'jwt-decode';
-import swal from 'sweetalert';
+import axios        from 'axios';
+import jwtDecode    from 'jwt-decode';
+import swal         from 'sweetalert';
 import setAuthToken from '../utils/SetAuthToken';
-import { USER_AUTHENTICATED, CREATE_PARCEL_SUCCESS,
-   CREATE_PARCEL_FAIL, GET_PARCELS_SUCCESS, 
-   GET_PARCELS_ERROR, GET_PARCEL_SUCCESS, GET_PARCEL_ERROR,
-   UPDATE_PARCEL_SUCCESS, UPDATE_PARCEL_ERROR} from './constants';
+import {
+  USER_AUTHENTICATED, CREATE_PARCEL_SUCCESS,
+  CREATE_PARCEL_FAIL, GET_PARCELS_SUCCESS,
+  GET_PARCELS_ERROR, GET_PARCEL_SUCCESS, GET_PARCEL_ERROR,
+  UPDATE_PARCEL_SUCCESS, UPDATE_PARCEL_ERROR,
+  SIGN_UP_USER_ERROR
+}                   from './constants';
 
 // const API = 'https://creditdeliveries.herokuapp.com';
-const API = 'http://localhost:9000';
-
-
+const API = 'http://localhost:3001';
 
 /**
- * 
- * 
+ *
+ *
  * @export
- * @param {any} user 
+ * @param {any} user
  * @returns {void}
  */
-export function setCurrentUser(user) {
+export function setCurrentUser (user) {
   return {
     type: USER_AUTHENTICATED,
     user
   };
 }
 
-/**
- * 
- * 
- * @desc this function signs in a user
- * @param {any} responseData 
- * @returns {void}
- */
-export function SigninRequest(userData) {
-     console.log(userData, 'hello there');
-  return dispatch => axios.post(`${API}/v1/login`, userData).then(res => {
-    const { token } = res.data;
-    localStorage.setItem('jwtToken', token);
-    setAuthToken(token);
-    dispatch(setCurrentUser(decode(token)));
-  });
+export function signupErros (errors) {
+  return {
+    type: SIGN_UP_USER_ERROR,
+    errors
+  };
 }
-// /**
-//  * 
-//  * 
-//  * @desc this method signs up a user 
-//  * @param {any} userData 
-//  * @returns {void}
-//  */
-// export function SignupRequest(userData) {
-//   return dispatch => axios.post(`${API}/api/v1/admin/signup`, userData).then(res => {
-//     const { token } = res.data;
-//     localStorage.setItem('jwtToken', token);
-//     setAuthToken(token);
-//     dispatch(setCurrentUser(decode(token)));
-//   }).catch((error)=> {
-//     return console.log(error, 'hello there')
-//   })
-// }
 
+/**
+ *
+ *
+ * @desc this function signs in a user
+ * @param {object} responseData
+ * @returns {function}
+ */
+export function SigninRequest (userData) {
+  return dispatch => axios.post(`${API}/v1/login`, userData)
+    .then(res => {
+      const token = registerToken(res.data);
+      dispatch(setCurrentUser(decode(token)));
+    });
+}
+
+/**
+ *
+ *
+ * @desc this function register the returned jwt token to
+ * localstorage and pass it to axios header
+ * @param {object} data
+ * @returns {string}
+ */
+function registerToken ({token}) {
+  localStorage.setItem('jwtToken', token);
+  setAuthToken(token);
+
+  return token;
+}
+
+/**
+ *
+ *
+ * @desc this method signs up a user
+ * @param {object} userData
+ * @param callback
+ * @returns {function}
+ */
+export function SignupRequest (userData, callback) {
+  return dispatch => axios.post(`${API}/v1/signup`, userData)
+    .then(res => {
+      const token = registerToken(res.data);
+      dispatch(setCurrentUser(decode(token)));
+      return callback(res);
+    }).catch(({res}) => {
+      dispatch(signupErros({errors: res}));
+      return callback(res);
+    })
+}
 
 
 // const createParcelSuccess = parcel => ({ type: CREATE_PARCEL_SUCCESS, parcel });
@@ -157,10 +180,10 @@ export function SigninRequest(userData) {
 //   }
 //     const updateAParcelSuccess = parcel =>
 //     ({ type: UPDATE_PARCEL_SUCCESS, parcel });
-  
+
 //   const updateAParcelFailed = parcel =>
 //     ({ type: UPDATE_PARCEL_ERROR, parcel });
-  
+
 //   /**
 //      * @function getABill
 //      *
@@ -188,11 +211,11 @@ export function SigninRequest(userData) {
 //     }
 
 /**
- * 
- * @desc this function returns a jwt token 
- * @param {any} token 
+ *
+ * @desc this function returns a jwt token
+ * @param {any} token
  * @returns {void}
  */
-function decode(token) {
+function decode (token) {
   return jwtDecode(token);
 }
