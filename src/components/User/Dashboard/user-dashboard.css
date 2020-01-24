@@ -1,0 +1,45 @@
+.card {
+    height: 190px;
+}
+
+.card-body .card-number {
+    font-size: 30px;
+}
+
+.card-body .card-caption {
+    font-size: 20px;
+}
+
+.card-icon .fa {
+    width: 60px;
+    height: 60px;
+}
+
+.scroll-y {
+    overflow-y: scroll;
+}
+
+.list {
+    height: 85%;
+}
+
+.slot-list {
+    height: 85%;
+}
+
+.fulfiled-slots {
+    height: 100%;
+}
+
+.slot-title {
+    width: 190px;
+}
+
+.fulfiled-list {
+    overflow: hidden;
+}
+
+a.nav-link {
+    width: 70px;
+    height: 55px;
+}

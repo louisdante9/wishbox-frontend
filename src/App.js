@@ -11,7 +11,7 @@ import {PrivateRoute}      from './utils/PrivateRoute'
 import Signup              from './components/Authentication/Signup';
 import Signin              from './components/Authentication/Signin';
 import Home                from './components/Home'
-// import Dashboard from './components/Dashboard';
+import Dashboard           from './components/User/Dashboard/Dashboard';
 // import AdminDashboard from './components/AdminDashboard';
 // import Transfer from './components/Transfer';
 
@@ -27,10 +27,10 @@ function App () {
         {/* <AdminPrivateRoute exact path="/admin/clients/:userId" component={Client} /> */}
         {/* <AdminPrivateRoute exact path="/admin/client/new" component={Signup} /> */}
         {/* <AdminPrivateRoute exact path="/admin/clients/:userId/deposite" component={Deposite} />
-        <PrivateRoute exact path="/dashboard" component={Dashboard} /> 
-        <PrivateRoute exact path="/transfer" component={Transfer} /> 
+        <PrivateRoute exact path="/transfer" component={Transfer} />
         <Route exact path="/admin/signup" component={CheckLoggedInUser(AdminSignup)} />
         <Route exact path="/admin/signin" component={CheckLoggedInUser(AdminLogin)} />*/}
+        <PrivateRoute exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/" component={Home}/>
         <Route exact path="/signin" component={CheckLoggedInUser(Signin)}/>
         <Route exact path="/signup" component={CheckLoggedInUser(Signup)}/>
