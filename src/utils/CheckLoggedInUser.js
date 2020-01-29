@@ -11,8 +11,8 @@ const CheckLoggedInUser = (ComposedComponent) => {
      * @return {*} set user authentication status
      */
     componentWillMount () {
-      if (this.props.isAuthenticated && (this.props.role === 'admin')) {
-        this.props.history.push('/admin/clients');
+      if (this.props.isAuthenticated && (this.props.role === 'superadmin')) {
+        this.props.history.push('/admin/dashboard');
       } else if (this.props.isAuthenticated && (this.props.role === 'user')) {
         console.log(this.props.isAuthenticated, this.props.role, 'user!!!!!')
         this.props.history.push('/dashboard');
@@ -25,8 +25,8 @@ const CheckLoggedInUser = (ComposedComponent) => {
      * @return {*} props
      */
     componentWillUpdate (nextProps) {
-      if (nextProps.isAuthenticated && (this.props.role === 'admin')) {
-        this.props.history.push('/admin/clients');
+      if (nextProps.isAuthenticated && (this.props.role === 'superadmin')) {
+        this.props.history.push('/admin/dashboard');
       } else if (this.props.isAuthenticated && (this.props.role === 'user')) {
         this.props.history.push('/dashboard');
       }

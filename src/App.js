@@ -8,22 +8,23 @@ import {PrivateRoute}      from './utils/PrivateRoute'
 // import AdminLogin from './components/AdminLogin';
 // import Client from './components/Client';
 // import Deposite from './components/Deposite';
-import Signup              from './components/Authentication/Signup';
-import Signin              from './components/Authentication/Signin';
-import Home                from './components/Home'
+import Signup from './components/Authentication/Signup';
+import Signin from './components/Authentication/Signin';
+import Home from './components/Home'
 // import Dashboard from './components/Dashboard';
-// import AdminDashboard from './components/AdminDashboard';
+import AdminDashboard from './components/Admin/Dashboard';
 // import Transfer from './components/Transfer';
 
 const hashHistory = createHashHistory({basename: process.env.PUBLIC_URL});
 
-function App () {
+function App (props) {
+  console.log(props, 'helo tere')
   return (
     <Router history={hashHistory}>
       <div id="app">
         {/* <PrivateRoute exact path="/parcel/:id" component={ViewParcel} />
           <PrivateRoute exact path="/parcel" component={BookParcel} />*/}
-        {/* <AdminPrivateRoute exact path="/admin/clients" component={AdminDashboard} />  */}
+        { props.user.role === 'superadmin' && <PrivateRoute exact path="/admin/dashboard" component={AdminDashboard} /> }
         {/* <AdminPrivateRoute exact path="/admin/clients/:userId" component={Client} /> */}
         {/* <AdminPrivateRoute exact path="/admin/client/new" component={Signup} /> */}
         {/* <AdminPrivateRoute exact path="/admin/clients/:userId/deposite" component={Deposite} />

@@ -11,7 +11,7 @@ import {
 }                   from './constants';
 
 // const API = 'https://creditdeliveries.herokuapp.com';
-const API = 'http://localhost:3001';
+const API = 'http://localhost:9000';
 
 /**
  *
@@ -46,6 +46,7 @@ export function SigninRequest (userData) {
     .then(res => {
       const token = registerToken(res.data);
       dispatch(setCurrentUser(decode(token)));
+      // console.log(decode(token), 'hello there')
     });
 }
 
@@ -58,7 +59,7 @@ export function SigninRequest (userData) {
  * @returns {string}
  */
 function registerToken ({token}) {
-  localStorage.setItem('jwtToken', token);
+  localStorage.setItem('token', token);
   setAuthToken(token);
 
   return token;

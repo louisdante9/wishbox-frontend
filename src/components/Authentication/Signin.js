@@ -38,7 +38,8 @@ function Signin (props) {
       let obj = {email, password};
       props.SigninRequest(obj)
         .then(() => {
-          props.history.push('/');
+          console.log('there u go')
+          props.history.push('/admin/dashboard');
         })
         .catch((err) => {
           setError(true);
