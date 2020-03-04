@@ -1,10 +1,14 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 
-export const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-      localStorage.getItem('jwtToken')
-          ? <Component {...props} />
-          : <Redirect to={{ pathname: '/', state: { from: props.location } }} />
-  )} />
-)
+export const PrivateRoute = ({ component: Component, role, requiredRoles, ...rest }) => {
+  const userHasRequiredRole = requiredRoles.includes(role)
+  console.log(userHasRequiredRole, 'this is a tets');
+  return (
+    <Route {...rest} render={props => (
+        localStorage.getItem('token') && userHasRequiredRole
+            ? <Component {...props} />
+            : <Redirect to={{ pathname: '/', state: { from: props.location } }} />
+    )} />
+  )
+}

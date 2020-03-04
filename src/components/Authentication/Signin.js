@@ -37,8 +37,13 @@ function Signin (props) {
     if (isValid) {
       let obj = {email, password};
       props.SigninRequest(obj)
-        .then(() => {
-          props.history.push('/');
+        .then((role) => {
+          // if (role === 'admin' || role === 'superadmin') {
+          //   props.history.push('/admin/dashboard');
+          // } else {
+          //   props.history.push('/dashboard');
+          // }
+          console.log(role, 'hello man');
         })
         .catch((err) => {
           setError(true);

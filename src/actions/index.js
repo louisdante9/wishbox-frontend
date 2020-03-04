@@ -1,17 +1,19 @@
-import axios        from 'axios';
-import jwtDecode    from 'jwt-decode';
-import swal         from 'sweetalert';
+import axios from 'axios';
+import jwtDecode from 'jwt-decode';
+import swal from 'sweetalert';
 import setAuthToken from '../utils/SetAuthToken';
 import {
-  USER_AUTHENTICATED, CREATE_PARCEL_SUCCESS,
-  CREATE_PARCEL_FAIL, GET_PARCELS_SUCCESS,
-  GET_PARCELS_ERROR, GET_PARCEL_SUCCESS, GET_PARCEL_ERROR,
-  UPDATE_PARCEL_SUCCESS, UPDATE_PARCEL_ERROR,
+  USER_AUTHENTICATED, CREATE_SLOT_SUCCESS,
+  CREATE_SLOT_FAIL, GET_SLOT_SUCCESS,
+  GET_SLOT_ERROR,
+  GET_ALL_WISHES_SUCCESS, GET_ALL_WISHES_ERROR,
+  GET_ALL_PENDING_WISHES_SUCCESS, GET_ALL_PENDING_WISHES_ERROR,
+  GET_ALL_FULFILLED_WISHES_SUCCESS, GET_ALL_FULFILLED_WISHES_ERROR,
   SIGN_UP_USER_ERROR
-}                   from './constants';
+} from './constants';
 
 // const API = 'https://creditdeliveries.herokuapp.com';
-const API = 'http://localhost:3001';
+const API = 'http://localhost:9000';
 
 /**
  *
@@ -20,14 +22,14 @@ const API = 'http://localhost:3001';
  * @param {any} user
  * @returns {void}
  */
-export function setCurrentUser (user) {
+export function setCurrentUser(user) {
   return {
     type: USER_AUTHENTICATED,
     user
   };
 }
 
-export function signupErros (errors) {
+export function signupErros(errors) {
   return {
     type: SIGN_UP_USER_ERROR,
     errors
@@ -41,11 +43,12 @@ export function signupErros (errors) {
  * @param {object} responseData
  * @returns {function}
  */
-export function SigninRequest (userData) {
+export function SigninRequest(userData) {
   return dispatch => axios.post(`${API}/v1/login`, userData)
     .then(res => {
       const token = registerToken(res.data);
       dispatch(setCurrentUser(decode(token)));
+      return decode(token)
     });
 }
 
@@ -57,10 +60,9 @@ export function SigninRequest (userData) {
  * @param {object} data
  * @returns {string}
  */
-function registerToken ({token}) {
-  localStorage.setItem('jwtToken', token);
+function registerToken({ token }) {
+  window.localStorage.setItem('token', token);
   setAuthToken(token);
-
   return token;
 }
 
@@ -72,65 +74,146 @@ function registerToken ({token}) {
  * @param callback
  * @returns {function}
  */
-export function SignupRequest (userData, callback) {
+export function SignupRequest(userData, callback) {
   return dispatch => axios.post(`${API}/v1/signup`, userData)
     .then(res => {
       const token = registerToken(res.data);
       dispatch(setCurrentUser(decode(token)));
       return callback(res);
-    }).catch(({res}) => {
-      dispatch(signupErros({errors: res}));
+    }).catch(({ res }) => {
+      dispatch(signupErros({ errors: res }));
       return callback(res);
     })
 }
 
 
-// const createParcelSuccess = parcel => ({ type: CREATE_PARCEL_SUCCESS, parcel });
+const createSlotSuccess = slot => ({ type: CREATE_SLOT_SUCCESS, slot });
 
-// const createParcelFail = parcel => ({ type: CREATE_PARCEL_FAIL, parcel });
+const createSlotFail = slot => ({ type: CREATE_SLOT_FAIL, slot });
+/**
+ * 
+ * 
+ * @desc this method signs up a user 
+ * @param {any} userData 
+ * @returns {void}
+ */
+export function createSlot(slotData) {
+  return dispatch => axios.post(`${API}/v1/slot`, slotData).then(res => {
+    swal({
+      title: "Hi there!",
+      text: res.data.message,
+      icon: "success"
+    });
+    dispatch(setCurrentUser(createSlotSuccess(res.data)));
+  }).catch((err) => {
+    dispatch(setCurrentUser(createSlotFail(err)));
+  })
+}
+
+
+const getSlotSuccess = slots =>
+  ({ type: GET_SLOT_SUCCESS, payload: slots });
+
+const getSlotFailed = slots =>
+  ({ type: GET_SLOT_ERROR, payload: slots });
+/**
+   * @function getAllBill
+   *
+   * @param { number } page
+   *
+   * @returns {object} dispatches an action
+   *
+   * @description It gets all the existing bills
+   */
+export const getAllSlots = () =>
+  dispatch => axios.get(`${API}/v1/slots`)
+    .then((response) => {
+      // return console.log(response.data, 'this is a test')
+      dispatch(getSlotSuccess(response.data));
+    })
+    .catch((err) => {
+      // return console.log(err, 'error is here')
+      dispatch(getSlotFailed(err.data.message));
+    });
+
+
+const getAllWishesSuccess = allWishes =>
+  ({ type: GET_ALL_WISHES_SUCCESS, payload: allWishes });
+
+const getAllWishesFailed = allWishes =>
+  ({ type: GET_ALL_WISHES_ERROR, payload: allWishes });
+
+/**
+ * @function getAllWishes
+ *
+ * @param { number } page
+ *
+ * @returns {object} dispatches an action
+ *
+ * @description It gets all the existing bills
+ */
+export const getAllWishes = () =>
+  dispatch => axios.get(`${API}/v1/wishes`)
+    .then((response) => {
+      // return console.log(response)
+      dispatch(getAllWishesSuccess(response.data));
+    })
+    .catch((err) => {
+      // return console.log(err, 'error is here')
+      dispatch(getAllWishesFailed(err.data.message));
+    });
+
+// const getAllPendingSuccess = allPendingWishes =>
+//   ({ type: GET_ALL_PENDING_WISHES_SUCCESS, payload: allPendingWishes });
+
+// const getAllPendingFailed = allPendingWishes =>
+//   ({ type: GET_ALL_PENDING_WISHES_ERROR, payload: allPendingWishes });
+
 // /**
-//  * 
-//  * 
-//  * @desc this method signs up a user 
-//  * @param {any} userData 
-//  * @returns {void}
+//  * @function getAllPendingWishes
+//  *
+//  * @param { number } page
+//  *
+//  * @returns {object} dispatches an action
+//  *
+//  * @description It gets all the existing bills
 //  */
-// export function createParcel(parcelData) {
-//   return dispatch => axios.post(`${API}/api/v1/admin/parcel`, parcelData).then(res => {
-//       swal({
-//           title: "Hi there!",
-//           text: res.data.message,
-//           icon: "success"
-//         });
-//     dispatch(setCurrentUser(createParcelSuccess(res.data)));
-//   }).catch((err)=> {
-//     dispatch(setCurrentUser(createParcelFail(err)));
-//   })
-// }
-
-
-// const getParcelsSuccess = parcels =>
-//   ({ type: GET_PARCELS_SUCCESS, parcels });
-
-// const getParcelsFailed = parcels =>
-//   ({ type: GET_PARCELS_ERROR, parcels });
-// /**
-//    * @function getAllBill
-//    *
-//    * @param { number } page
-//    *
-//    * @returns {object} dispatches an action
-//    *
-//    * @description It gets all the existing bills
-//    */
-// export const getAllParcels = () =>
-//   dispatch => axios.get(`${API}/api/v1/admin/parcel`)
+// export const getAllPendingWishes = () =>
+//   dispatch => axios.get(`${API}/v1/wishes?status=pending`)
 //     .then((response) => {
-//       dispatch(getParcelsSuccess(response.data));
+//       dispatch(getAllPendingSuccess(response.data));
 //     })
 //     .catch((err) => {
-//       dispatch(getParcelsFailed(err.response.data.message,));
+//       // return console.log(err, 'error is here')
+//       dispatch(getAllPendingFailed(err.data.message));
 //     });
+
+
+const getAllFulfilledSuccess = allFulfilledWishes =>
+  ({ type: GET_ALL_FULFILLED_WISHES_SUCCESS, payload: allFulfilledWishes });
+
+const getAllFulfilledFailed = allFulfilledWishes =>
+  ({ type: GET_ALL_FULFILLED_WISHES_ERROR, payload: allFulfilledWishes });
+
+/**
+ * @function getAllFulfilledWishes
+ *
+ * @param { number } page
+ *
+ * @returns {object} dispatches an action
+ *
+ * @description It gets all the existing bills
+ */
+export const getAllFulfilledWishes = () =>
+  dispatch => axios.get(`${API}/v1/wishes?status=fulfilled`)
+    .then((response) => {
+      dispatch(getAllFulfilledSuccess(response.data));
+    })
+    .catch((err) => {
+      // return console.log(err, 'error is here')
+      dispatch(getAllFulfilledFailed(err.data.message));
+    });
+
 
 // /**
 //  * 
@@ -216,6 +299,6 @@ export function SignupRequest (userData, callback) {
  * @param {any} token
  * @returns {void}
  */
-function decode (token) {
+function decode(token) {
   return jwtDecode(token);
 }

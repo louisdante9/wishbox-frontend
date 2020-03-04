@@ -136,6 +136,7 @@ a:hover {
   display: flex;
   flex-direction: column;
   color: #AAACAE;
+  border-left: 3px solid transparent;
 }
 
 .side-nav div span a:hover {
@@ -358,7 +359,7 @@ a:hover {
 }
 .filter .profile-notif {
 display: flex;
-justify-content: space-between;
+justify-content: flex-end;
 align-items: center;
 }
 
@@ -513,6 +514,7 @@ box-shadow: 0px 1.81667px 6.8125px rgba(0, 0, 0, 0.05);
 border-radius: 6px;
 display: flex;
 flex-direction: column;
+cursor: pointer;
 }
 .fulfiled-slot-item {
 width: 380px;
@@ -756,7 +758,7 @@ line-height: 80px;
 color: #AAACAE;
 border-bottom: 4px solid transparent;
 }
-.admin-nav div span a.active {
+.admin-nav div span a.is-active {
 border-bottom: 4px solid;
 color: #377CFF;
 }
@@ -797,6 +799,7 @@ color: #3D3D3D
 display: flex;
 justify-content: space-between;
 padding: 0 20px;
+font-size: 18px;
 }
 
 .admin-desc div {
@@ -810,21 +813,30 @@ font-size: 16px;
 color: #3D3D3D
 }
 
-.admin-slot-bar div a {
+.admin-slot-bar div{
 border-left: 4px solid transparent;
 padding-left: 14px;
 height: 30px;
 display: block;
 line-height: 30px;
+color: #909090;
 }
-.admin-slot-bar div a:hover{
+.admin-slot-bar div:hover,
+.admin-slot-bar div.active{
 border-left: 4px solid #377CFF;
 color: #377CFF;
 padding-left: 14px;
 height: 30px;
 line-height: 30px;
-
+cursor: pointer;
 }
+.admin-title p.open {
+  color: #E4C940;
+}
+.admin-title p.closed {
+  color: #19B344;
+}
+
 .setting-icon {
 text-align: right;
 font-size: 20px;
@@ -832,9 +844,11 @@ cursor: pointer;
 }
 
 .img-frame {
+  text-align: center;
+}
+
+.img-frame > img{
 height: 150px;
-width: 150px;
-background: aqua;
 border-radius: 50%;
 margin: 0 auto;
 }
@@ -864,6 +878,9 @@ text-align: center;
 background: #377CFF;
 width: 307px;
 border-radius: 6px;
+}
+.logo {
+  height: 35px;
 }
 @media screen and (max-width: 991px) {
   .logo-nav > a {

@@ -1,15 +1,15 @@
-import React                                   from 'react';
-import ReactDOM                                from 'react-dom';
-import thunk                                   from 'redux-thunk';
-import jwt                                     from 'jsonwebtoken';
-import {Provider}                              from 'react-redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import thunk from 'redux-thunk';
+import jwt from 'jsonwebtoken';
+import {Provider} from 'react-redux';
 import {applyMiddleware, createStore, compose} from 'redux';
-import {setCurrentUser}                        from './actions';
-import setAuthToken                            from './utils/SetAuthToken';
-import rootReducer                             from './reducers';
+import {setCurrentUser} from './actions';
+import setAuthToken from './utils/SetAuthToken';
+import rootReducer from './reducers';
 import './index.css';
-import App                                     from './App';
-import * as serviceWorker                      from './serviceWorker';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
 
 
 const middleware = applyMiddleware(thunk);
@@ -24,7 +24,7 @@ const configureStore = (state = {}) => createStore(
 
 const store = configureStore();
 const {localStorage} = window;
-const jwtToken = localStorage && localStorage.getItem('jwtToken');
+const jwtToken = localStorage && localStorage.getItem('token');
 const decodedToken = jwt.decode(jwtToken);
 
 if (decodedToken) {
@@ -33,7 +33,7 @@ if (decodedToken) {
     setAuthToken(jwtToken);
     store.dispatch(setCurrentUser(jwt.decode(jwtToken)));
   } else {
-    localStorage.removeItem('jwtToken');
+    localStorage.removeItem('token');
   }
 }
 ReactDOM.render(
