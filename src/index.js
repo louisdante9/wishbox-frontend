@@ -26,7 +26,6 @@ const store = configureStore();
 const {localStorage} = window;
 const jwtToken = localStorage && localStorage.getItem('token');
 const decodedToken = jwt.decode(jwtToken);
-console.log(jwtToken, 'geee');
 
 if (decodedToken) {
   const hasExpired = decodedToken.exp - (Date.now() / 1000) < 0;
@@ -39,7 +38,7 @@ if (decodedToken) {
 }
 ReactDOM.render(
   <Provider store={store}>
-    <App user={decodedToken}/>
+    <App/>
   </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

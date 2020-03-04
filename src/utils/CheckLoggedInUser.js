@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {connect}          from 'react-redux';
-import PropTypes          from 'prop-types';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 const CheckLoggedInUser = (ComposedComponent) => {
   /**
@@ -11,10 +11,9 @@ const CheckLoggedInUser = (ComposedComponent) => {
      * @return {*} set user authentication status
      */
     componentWillMount () {
-      if (this.props.isAuthenticated && (this.props.role === 'superadmin')) {
+      if ((this.props.isAuthenticated && (this.props.role === 'superadmin')) || (this.props.isAuthenticated && (this.props.role === 'admin')) ) {
         this.props.history.push('/admin/dashboard');
       } else if (this.props.isAuthenticated && (this.props.role === 'user')) {
-        console.log(this.props.isAuthenticated, this.props.role, 'user!!!!!')
         this.props.history.push('/dashboard');
       }
     }
@@ -25,7 +24,7 @@ const CheckLoggedInUser = (ComposedComponent) => {
      * @return {*} props
      */
     componentWillUpdate (nextProps) {
-      if (nextProps.isAuthenticated && (this.props.role === 'superadmin')) {
+      if ((nextProps.isAuthenticated && (this.props.role === 'superadmin')) || (this.props.isAuthenticated && (this.props.role === 'admin')) ) {
         this.props.history.push('/admin/dashboard');
       } else if (this.props.isAuthenticated && (this.props.role === 'user')) {
         this.props.history.push('/dashboard');
