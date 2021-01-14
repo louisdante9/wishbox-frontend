@@ -1,12 +1,12 @@
 import React, { Fragment } from 'react';
 
-function SlotCard({cardNumber, cardCaption}) {
+function SlotCard({cardNumber, cardCaption, iconType}) {
     return (
         <Fragment>
         <div className="card">
             <div className="card-body">
                 <div className="card-icon">
-                    <i className="fa fa-folder-open-o folder"></i>
+                    <i className={iconType}></i>
                 </div>
                 <div className="card-number">{cardNumber}</div>
                 <div className="card-caption">{cardCaption}</div>

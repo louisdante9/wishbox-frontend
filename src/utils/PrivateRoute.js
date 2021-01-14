@@ -3,7 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 
 export const PrivateRoute = ({ component: Component, role, requiredRoles, ...rest }) => {
   const userHasRequiredRole = requiredRoles.includes(role)
-  console.log(userHasRequiredRole, 'this is a tets');
+  console.log(userHasRequiredRole, 'this is a test');
   return (
     <Route {...rest} render={props => (
         localStorage.getItem('token') && userHasRequiredRole

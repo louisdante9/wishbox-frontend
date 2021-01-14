@@ -3,8 +3,9 @@ import * as types from '../actions/constants';
 
 
 const initialState = {
-    allWishes: {},
-    pendingWishes: {},
+  allWishes: {},
+  pendingWishes: {},
+  fulfilledWishes: {}
 };
 
 const wishes = (state = initialState, action) => {
@@ -16,20 +17,21 @@ const wishes = (state = initialState, action) => {
 
         case types.GET_ALL_WISHES_ERROR:
             return {};
-        // case types.GET_ALL_PENDING_WISHES_SUCCESS:
-        //     return {
-        //         ...state, pendingWishes: {...action.payload}
-        //     };
 
-        // case types.GET_ALL_PENDING_WISHES_ERROR:
-        //     return {};
-        // case types.GET_ALL_FULFILLED_WISHES_SUCCESS:
-        //     return {
-        //         ...state, fulfilledWishes: {...action.payload}
-        //     };
+        case types.GET_ALL_PENDING_WISHES_SUCCESS:
+            return {
+                ...state, pendingWishes: {...action.payload}
+            };
 
-        // case types.GET_ALL_FULFILLED_WISHES_ERROR:
-        //     return {};
+        case types.GET_ALL_PENDING_WISHES_ERROR:
+            return {};
+        case types.GET_ALL_FULFILLED_WISHES_SUCCESS:
+            return {
+                ...state, fulfilledWishes: {...action.payload}
+            };
+
+        case types.GET_ALL_FULFILLED_WISHES_ERROR:
+            return {};
         //   case types.UPDATE_CLIENT_SUCCESS:
         //     const { users } = state;
         //     const filteredUsers = users.filter(({ _id }) => _id !== action.payload._id);

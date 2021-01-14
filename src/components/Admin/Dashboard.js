@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import moment from 'moment';
 
 import { getAllSlots, getAllWishes, getAllFulfilledWishes } from '../../actions'
-import Footer from '../Footer';
+import Footer from '../Commons/Footer';
 // import logo from '../../assests/logo.png'
 
 

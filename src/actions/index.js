@@ -13,7 +13,7 @@ import {
 } from './constants';
 
 // const API = 'https://creditdeliveries.herokuapp.com';
-const API = 'http://localhost:9000';
+const API = 'http://localhost:3001';
 
 /**
  *
@@ -45,8 +45,8 @@ export function signupErros(errors) {
  */
 export function SigninRequest(userData) {
   return dispatch => axios.post(`${API}/v1/login`, userData)
-    .then(res => {
-      const token = registerToken(res.data);
+    .then(({data}) => {
+      const token = registerToken('token', data, setAuthToken);
       dispatch(setCurrentUser(decode(token)));
       return decode(token)
     });
@@ -60,12 +60,13 @@ export function SigninRequest(userData) {
  * @param {object} data
  * @returns {string}
  */
-function registerToken({ token }) {
-  window.localStorage.setItem('token', token);
-  setAuthToken(token);
+function registerToken(key, { token }, fn) {
+  setLocalStore(key, token)
+  fn(token);
   return token;
 }
 
+const setLocalStore = (key, token) => window.localStorage.setItem(key, token);
 /**
  *
  *
@@ -77,10 +78,12 @@ function registerToken({ token }) {
 export function SignupRequest(userData, callback) {
   return dispatch => axios.post(`${API}/v1/signup`, userData)
     .then(res => {
+      console.log(res, 'response')
       const token = registerToken(res.data);
       dispatch(setCurrentUser(decode(token)));
       return callback(res);
     }).catch(({ res }) => {
+      console.log(res, 'res')
       dispatch(signupErros({ errors: res }));
       return callback(res);
     })
@@ -126,14 +129,14 @@ const getSlotFailed = slots =>
    * @description It gets all the existing bills
    */
 export const getAllSlots = () =>
-  dispatch => axios.get(`${API}/v1/slots`)
+  dispatch => axios.get(`${API}/v1/slots?open=true`)
     .then((response) => {
       // return console.log(response.data, 'this is a test')
       dispatch(getSlotSuccess(response.data));
     })
     .catch((err) => {
       // return console.log(err, 'error is here')
-      dispatch(getSlotFailed(err.data.message));
+      dispatch(getSlotFailed(err));
     });
 
 
@@ -163,30 +166,29 @@ export const getAllWishes = () =>
       dispatch(getAllWishesFailed(err.data.message));
     });
 
-// const getAllPendingSuccess = allPendingWishes =>
-//   ({ type: GET_ALL_PENDING_WISHES_SUCCESS, payload: allPendingWishes });
+const getAllPendingSuccess = allPendingWishes =>
+  ({ type: GET_ALL_PENDING_WISHES_SUCCESS, payload: allPendingWishes });
 
-// const getAllPendingFailed = allPendingWishes =>
-//   ({ type: GET_ALL_PENDING_WISHES_ERROR, payload: allPendingWishes });
+const getAllPendingFailed = allPendingWishes =>
+  ({ type: GET_ALL_PENDING_WISHES_ERROR, payload: allPendingWishes });
 
-// /**
-//  * @function getAllPendingWishes
-//  *
-//  * @param { number } page
-//  *
-//  * @returns {object} dispatches an action
-//  *
-//  * @description It gets all the existing bills
-//  */
-// export const getAllPendingWishes = () =>
-//   dispatch => axios.get(`${API}/v1/wishes?status=pending`)
-//     .then((response) => {
-//       dispatch(getAllPendingSuccess(response.data));
-//     })
-//     .catch((err) => {
-//       // return console.log(err, 'error is here')
-//       dispatch(getAllPendingFailed(err.data.message));
-//     });
+/**
+ * @function getAllPendingWishes
+ *
+ * @param { number } page
+ *
+ * @returns {object} dispatches an action
+ *
+ * @description It gets all the existing bills
+ */
+export const getAllPendingWishes = (id) =>
+  dispatch => axios.get(`${API}/v1/wishes?status=pending&userId=${id}`)
+    .then((response) => {
+      dispatch(getAllPendingSuccess(response.data));
+    })
+    .catch((err) => {
+      dispatch(getAllPendingFailed(err));
+    });
 
 
 const getAllFulfilledSuccess = allFulfilledWishes =>
@@ -204,14 +206,14 @@ const getAllFulfilledFailed = allFulfilledWishes =>
  *
  * @description It gets all the existing bills
  */
-export const getAllFulfilledWishes = () =>
-  dispatch => axios.get(`${API}/v1/wishes?status=fulfilled`)
+export const getAllFulfilledWishes = (id) =>
+  dispatch => axios.get(`${API}/v1/wishes?status=fulfilled&userId=${id}`)
     .then((response) => {
       dispatch(getAllFulfilledSuccess(response.data));
     })
     .catch((err) => {
       // return console.log(err, 'error is here')
-      dispatch(getAllFulfilledFailed(err.data.message));
+      dispatch(getAllFulfilledFailed(err));
     });
 
 
