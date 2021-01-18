@@ -23,7 +23,6 @@ function Dashboard({
   const [pendingWish, setPendWish] = useState("0");
   const [fulfiledWish, setfulfiledWish] = useState("0");
   const [slotItems, setSLotItems] = useState([]);
-  //   console.log(openSlot, pendWish, fulfilWish, "hello there");
 
   useEffect(() => {
     getAllSlots();
@@ -42,7 +41,6 @@ function Dashboard({
     setfulfiledWish(fulfiledCount.itemCount);
     setSLotItems(slotList);
   }, [slotCount, pendingCount, fulfiledCount, slotList, wishes]);
-  // console.log(slotCount, openSlot, 'user id')
   return (
     <Fragment>
       <div className="wrapper d-flex">
@@ -207,7 +205,6 @@ function Dashboard({
 }
 
 const mapStateToProps = (state) => {
-   console.log(state, 'state');
   const user = state.setCurrentUser.user;
   const slotList = state.slots.data || [];
   const slotCount = state.slots.meta_data || {};

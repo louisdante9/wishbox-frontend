@@ -15,7 +15,6 @@ function Signin(props) {
   const [password, setPassword] = React.useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
 
-  // const [loading, setLoading] = React.useState(false);
 
   useEffect(() => {
     if (email.trim() && password.trim()) {
