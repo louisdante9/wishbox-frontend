@@ -8,6 +8,7 @@ import {SignupRequest} from '../../actions';
 import HttpStatus from 'http-status-codes';
 import Header from "../Commons/Header";
 import Input from "../Commons/Input";
+import Button from "../Commons/Botton"
 import { TermsCheckbox } from "../Commons/TermsCheckbox";
 
 
@@ -23,7 +24,7 @@ function Signup (props) {
   const [confirmPassword, setConfirmPassword] = React.useState("");
   const [helperTexts, setHelperTexts] = useState([]);
   const [error, setError] = useState(false);
-  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
+  const [btnDisabled, setBtnDisabled] = useState(true);
   const [check, setCheck] = useState(false);
   useEffect(() => {
     document.title = `wishBox::Signup`;
@@ -38,9 +39,9 @@ function Signup (props) {
       street.trim() && 
       check === true
     ) {
-      setIsButtonDisabled(false);
+      setBtnDisabled(false);
     } else {
-      setIsButtonDisabled(true);
+      setBtnDisabled(true);
     }
   }, [name, username, password, confirmPassword, email, phone, state, city, street, check]);
 
@@ -227,7 +228,10 @@ function Signup (props) {
                     </div>
                   </div>
 
-                  <TermsCheckbox onchange={() => setCheck(!check)} page='signup' />
+                  <TermsCheckbox
+                    onchange={() => setCheck(!check)}
+                    page="signup"
+                  />
 
                   <div className="row align-items-center mb-5">
                     <div className="col-5 col-sm-6">
@@ -240,13 +244,13 @@ function Signup (props) {
                     </div>
 
                     <div className="col-7 col-sm-6 text-right">
-                      <button
+                      <Button
                         type="submit"
                         className="btn btn-primary transition-3d-hover"
-                        onClick={onSubmit}
-                        disabled={isButtonDisabled}>
+                        onSubmit={onSubmit}
+                        disabled={btnDisabled}>
                         Get Started
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </form>
