@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import {NavLink} from 'react-router-dom';
+import {connect} from  'react-redux'
 import SideBar from './Commons/SideBar'
 
 const Slot = () => {
@@ -218,4 +219,4 @@ const Slot = () => {
 };
 
 
-export default Slot;
+export default connect(null, null)(Slot);

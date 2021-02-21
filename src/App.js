@@ -8,12 +8,12 @@ import {PrivateRoute} from './utils/PrivateRoute'
 // import AdminLogin from './components/AdminLogin';
 // import Client from './components/Client';
 // import Deposite from './components/Deposite';
-import Signup from './components/Authentication/Signup';
-import Signin from './components/Authentication/Signin';
+import Signup from './components/auth/Signup';
+import Signin from './components/auth/Signin';
 import Home from './components/Home'
 import Dashboard from './components/Dashboard';
 import Slot from './components/Slots';
-import AdminDashboard from './components/Admin/Dashboard';
+import AdminDashboard from './components/admin/Dashboard';
 // import Transfer from './components/Transfer';
 
 // const hashHistory = createHashHistory({basename: process.env.PUBLIC_URL});

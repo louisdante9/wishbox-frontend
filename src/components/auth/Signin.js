@@ -8,7 +8,6 @@ import { SigninRequest } from "../../actions";
 import Button from "../Commons/Botton";
 import Input from "../Commons/Input";
 import Header from "../Commons/Header";
-import { TermsCheckbox } from "../Commons/TermsCheckbox";
 
 function Signin(props) {
   const [email, setEmail] = React.useState("");
@@ -99,10 +98,7 @@ function Signin(props) {
                       text={"PASSWORD"}
                       name={"password"}
                     />
-                  </div>
-
-                  <TermsCheckbox />
-                 
+                  </div>                 
 
                   <div className="row align-items-center mb-5">
                     <div className="col-5 col-sm-6">
@@ -120,8 +116,9 @@ function Signin(props) {
                         className="btn btn-primary transition-3d-hover"
                         onSubmit={onSubmit}
                         disabled={btnDisabled}
-                        text={"Get Started"}
-                      />
+                      >
+                      Get Started
+                      </Button>
                     </div>
                   </div>
                 </form>
